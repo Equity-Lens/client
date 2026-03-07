@@ -49,9 +49,11 @@ const SignIn: React.FC = () => {
     state?.message || ""
   );
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/v1";
+
   const validateField = (
     name: string,
-    value: string | boolean
+    value: string | boolean,
   ): string | undefined => {
     if (typeof value !== "string") return undefined;
 
@@ -108,7 +110,7 @@ const SignIn: React.FC = () => {
   };
 
   const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     e.preventDefault();
 
@@ -120,7 +122,7 @@ const SignIn: React.FC = () => {
     setErrors({});
 
     try {
-      const response = await fetch("http://localhost:3001/v1/auth/signin", {
+      const response = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

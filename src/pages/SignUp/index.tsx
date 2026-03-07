@@ -52,6 +52,8 @@ const SignUp: React.FC = () => {
     useState<boolean>(false);
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/v1";
+
   // Password strength calculator
   const calculatePasswordStrength = (password: string): PasswordStrength => {
     let score = 0;
@@ -117,7 +119,7 @@ const SignUp: React.FC = () => {
     if (name === "password" && touched.confirmPassword) {
       const confirmError = validateField(
         "confirmPassword",
-        formData.confirmPassword
+        formData.confirmPassword,
       );
       setErrors((prev) => ({ ...prev, confirmPassword: confirmError }));
     }
@@ -162,7 +164,7 @@ const SignUp: React.FC = () => {
     setErrors({});
 
     try {
-      const response = await fetch("http://localhost:3001/v1/auth/signup", {
+      const response = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
