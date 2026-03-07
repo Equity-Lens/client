@@ -6,7 +6,7 @@
   "homepage": ".",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "build:prod": "cross-env NODE_ENV=production tsc -b && vite build --mode production",
     "build:analyze": "npm run build:prod && npx vite-bundle-analyzer dist/stats.html",
     "build:size": "npm run build:prod && npx bundlesize",

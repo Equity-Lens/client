@@ -35,6 +35,16 @@ export interface ChatSessionWithMessages extends ChatSession {
   messages: ChatMessage[];
 }
 
+export interface ConversationMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export interface ChatResponse {
+  answer: string;
+  tools_used: string[];
+}
+
 // API Functions
 export const chatHistoryService = {
   // Get all sessions
@@ -99,32 +109,31 @@ export const chatHistoryService = {
     return response.ok;
   },
 
-  // In chatHistoryService.ts - add this method
-// Guest chat - stateless, no persistence
-async sendMessageAsGuest(
-  message: string,
-  conversationHistory: ConversationMessage[] = []
-): Promise<ChatResponse> {
-  const response = await fetch(`${API_BASE_URL}/chat/guest`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      message,
-      conversation_history: conversationHistory,
-    }),
-  });
+  // Guest chat - stateless, no persistence
+  async sendMessageAsGuest(
+    message: string,
+    conversationHistory: ConversationMessage[] = []
+  ): Promise<ChatResponse> {
+    const response = await fetch(`${API_BASE_URL}/chat/guest`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+        conversation_history: conversationHistory,
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to send message");
-  }
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
 
-  const result = await response.json();
-  
-  return {
-    answer: result.data?.answer || "I couldn't generate a response.",
-    tools_used: result.data?.tools_used || [],
-  };
-}
+    const result = await response.json();
+
+    return {
+      answer: result.data?.answer || "I couldn't generate a response.",
+      tools_used: result.data?.tools_used || [],
+    };
+  },
 };
