@@ -1,4 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_AI_SERVICE_URL || "http://localhost:8000/v1/ai/sessions";
+// const API_BASE_URL = import.meta.env.VITE_AI_SERVICE_URL || "http://localhost:8000/v1/ai/sessions";
 
 // Get auth token
 const getAuthToken = (): string | null => {
