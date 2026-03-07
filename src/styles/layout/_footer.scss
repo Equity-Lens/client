@@ -1,0 +1,252 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+// ============================================
+// FOOTER COMPONENT
+// ============================================
+
+.footer {
+  background-color: $bg-dark;
+  color: $text-inverse;
+  margin-top: auto;
+
+  &__container {
+    max-width: $container-xl;
+    margin: 0 auto;
+    padding: $spacing-12 $spacing-6 $spacing-6;
+
+    @include respond-to('md') {
+      padding: $spacing-8 $spacing-4 $spacing-4;
+    }
+  }
+
+  // ============================================
+  // MAIN CONTENT GRID
+  // ============================================
+
+  &__content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: $spacing-10;
+
+    @include respond-to('lg') {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-8;
+    }
+
+    @include respond-to('sm') {
+      grid-template-columns: 1fr;
+      gap: $spacing-8;
+    }
+  }
+
+  // ============================================
+  // BRAND SECTION
+  // ============================================
+
+  &__brand {
+    @include respond-to('lg') {
+      grid-column: 1 / -1;
+    }
+
+    @include respond-to('sm') {
+      text-align: center;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-inverse;
+    text-decoration: none;
+    transition: $transition-colors;
+
+    &:hover {
+      color: $brand-primary;
+    }
+  }
+
+  &__logo-icon {
+    width: 28px;
+    height: 28px;
+    color: $brand-primary;
+  }
+
+  &__description {
+    margin-top: $spacing-4;
+    font-size: $font-size-sm;
+    color: rgba($text-inverse, 0.7);
+    line-height: $line-height-relaxed;
+    max-width: 320px;
+
+    @include respond-to('sm') {
+      max-width: 100%;
+    }
+  }
+
+  // ============================================
+  // SOCIAL LINKS
+  // ============================================
+
+  &__social {
+    display: flex;
+    gap: $spacing-3;
+    margin-top: $spacing-5;
+
+    @include respond-to('sm') {
+      justify-content: center;
+    }
+  }
+
+  &__social-link {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba($text-inverse, 0.1);
+    border-radius: $radius-lg;
+    color: $text-inverse;
+    transition: $transition-all;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background-color: $brand-primary;
+      transform: translateY(-2px);
+    }
+  }
+
+  // ============================================
+  // LINKS SECTIONS
+  // ============================================
+
+  &__links-group {
+    @include respond-to('sm') {
+      text-align: center;
+    }
+  }
+
+  &__links-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-inverse;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: $spacing-4;
+
+    &--mt {
+      margin-top: $spacing-6;
+    }
+  }
+
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: rgba($text-inverse, 0.7);
+    text-decoration: none;
+    transition: $transition-colors;
+
+    &:hover {
+      color: $brand-primary;
+    }
+  }
+
+  // ============================================
+  // CONTACT SECTION
+  // ============================================
+
+  &__contact {
+    margin-bottom: $spacing-4;
+  }
+
+  &__contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-size: $font-size-sm;
+    color: rgba($text-inverse, 0.7);
+    text-decoration: none;
+    transition: $transition-colors;
+
+    &:hover {
+      color: $brand-primary;
+    }
+
+    @include respond-to('sm') {
+      justify-content: center;
+    }
+  }
+
+  &__contact-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  // ============================================
+  // DIVIDER
+  // ============================================
+
+  &__divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($text-inverse, 0.2),
+      transparent
+    );
+    margin: $spacing-8 0 $spacing-6;
+  }
+
+  // ============================================
+  // BOTTOM BAR
+  // ============================================
+
+  &__bottom {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: $spacing-4;
+
+    @include respond-to('md') {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  &__copyright {
+    font-size: $font-size-sm;
+    color: rgba($text-inverse, 0.6);
+    margin: 0;
+  }
+
+  &__disclaimer {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-size: $font-size-xs;
+    color: rgba($text-inverse, 0.5);
+    margin: 0;
+
+    @include respond-to('md') {
+      justify-content: center;
+    }
+  }
+
+  &__disclaimer-icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+}

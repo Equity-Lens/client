@@ -1,0 +1,337 @@
+// ============================================
+// TRADING INTELLIGENCE CHAT INTERFACE
+// ============================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.trading-intelligence {
+  display: flex;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $bg-primary;
+  overflow: hidden;
+  z-index: 1;
+
+  &__chat {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    background-color: $bg-primary;
+  }
+}
+
+.trading-intelligence__chat--full-width {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-8 $spacing-4;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+
+  @include respond-to('md') {
+    padding: $spacing-6 $spacing-3;
+    gap: $spacing-5;
+  }
+
+  @include respond-to('sm') {
+    padding: $spacing-4 $spacing-3;
+    gap: $spacing-4;
+  }
+}
+
+.message {
+  display: flex;
+  gap: $spacing-4;
+  animation: fadeIn 0.3s ease;
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @include respond-to('sm') {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__text {
+    font-size: $font-size-base;
+    line-height: $line-height-relaxed;
+    color: $text-primary;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    @include respond-to('sm') {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__tools {
+    margin-top: $spacing-3;
+    padding-top: $spacing-3;
+    border-top: 1px solid $border-secondary;
+
+    .tools-label {
+      font-size: $font-size-xs;
+      font-weight: 600;
+      color: $text-tertiary;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: $spacing-2;
+    }
+
+    .tools-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-2;
+    }
+
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: $spacing-1 $spacing-2;
+      background-color: $bg-tertiary;
+      border-radius: $radius-md;
+      font-size: $font-size-xs;
+      color: $text-secondary;
+    }
+  }
+
+  &__sources {
+    margin-top: $spacing-3;
+    padding-top: $spacing-3;
+    border-top: 1px solid $border-secondary;
+    font-size: $font-size-xs;
+    color: $text-secondary;
+
+    .sources-label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: $spacing-2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 10px;
+      color: $text-tertiary;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: $spacing-4;
+      margin: 0;
+
+      li {
+        margin-bottom: $spacing-1;
+        line-height: 1.4;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &--user {
+    .message__avatar {
+      background-color: $brand-primary;
+      color: $text-inverse;
+    }
+
+    .message__text {
+      background-color: $bg-tertiary;
+      padding: $spacing-3 $spacing-4;
+      border-radius: $radius-xl;
+      border-top-left-radius: $radius-sm;
+    }
+
+    .message__sources {
+      display: none;
+    }
+  }
+
+  &--assistant {
+    .message__avatar {
+      background-color: $brand-accent;
+      color: $text-inverse;
+    }
+
+    .message__text {
+      padding: $spacing-2 0;
+    }
+  }
+
+  &__typing {
+    display: flex;
+    gap: $spacing-1;
+    padding: $spacing-3 $spacing-4;
+
+    span {
+      width: 8px;
+      height: 8px;
+      border-radius: $radius-full;
+      background-color: $text-tertiary;
+      animation: typing 1.4s infinite;
+
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+}
+
+.chat-input {
+  flex-shrink: 0;
+  padding: $spacing-4;
+  border-top: 1px solid $border-primary;
+  background-color: $bg-primary;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+
+  @include respond-to('sm') {
+    padding: $spacing-3;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    background-color: $bg-primary;
+    border: 1px solid $border-secondary;
+    border-radius: $radius-2xl;
+    padding: $spacing-3 $spacing-4;
+    transition: all 0.2s ease;
+
+    &:focus-within {
+      border-color: $brand-primary;
+      box-shadow: 0 0 0 3px rgba($brand-primary, 0.1);
+    }
+  }
+
+  textarea {
+    flex: 1;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+    color: $text-primary;
+    outline: none;
+    min-height: 24px;
+    max-height: 200px;
+    font-family: $font-primary;
+
+    &::placeholder {
+      color: $text-tertiary;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @include respond-to('sm') {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__send {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    margin-left: $spacing-2;
+    border: none;
+    background-color: $brand-primary;
+    color: $text-inverse;
+    border-radius: $radius-full;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: $brand-primary-dark;
+      transform: scale(1.05);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      background-color: $border-secondary;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  &__hint {
+    font-size: $font-size-xs;
+    color: $text-tertiary;
+    margin-top: $spacing-2;
+    padding-left: $spacing-4;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}

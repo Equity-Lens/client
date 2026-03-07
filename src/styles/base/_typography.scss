@@ -1,0 +1,66 @@
+// ============================================
+// TYPOGRAPHY STYLES
+// ============================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+h1 {
+  @include heading('xl');
+  
+  @include respond-to('sm') {
+    font-size: $font-size-3xl;
+  }
+}
+
+h2 {
+  @include heading('lg');
+  
+  @include respond-to('sm') {
+    font-size: $font-size-2xl;
+  }
+}
+
+h3 {
+  @include heading('base');
+}
+
+h4 {
+  @include heading('sm');
+}
+
+h5 {
+  @include heading('xs');
+}
+
+h6 {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+// Text utilities
+.text {
+  &-xs { font-size: $font-size-xs; }
+  &-sm { font-size: $font-size-sm; }
+  &-base { font-size: $font-size-base; }
+  &-lg { font-size: $font-size-lg; }
+  &-xl { font-size: $font-size-xl; }
+  &-2xl { font-size: $font-size-2xl; }
+  &-3xl { font-size: $font-size-3xl; }
+  
+  &-primary { color: $text-primary; }
+  &-secondary { color: $text-secondary; }
+  &-tertiary { color: $text-tertiary; }
+  &-inverse { color: $text-inverse; }
+  
+  &-center { text-align: center; }
+  &-left { text-align: left; }
+  &-right { text-align: right; }
+  
+  &-light { font-weight: $font-weight-light; }
+  &-normal { font-weight: $font-weight-normal; }
+  &-medium { font-weight: $font-weight-medium; }
+  &-semibold { font-weight: $font-weight-semibold; }
+  &-bold { font-weight: $font-weight-bold; }
+  
+  &-truncate { @include text-truncate; }
+}

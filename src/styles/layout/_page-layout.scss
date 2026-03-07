@@ -1,0 +1,103 @@
+// ============================================
+// PAGE LAYOUT
+// ============================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// App wrapper - enables sticky footer
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page {
+  flex: 1; // Takes remaining space, pushes footer down
+  padding: $spacing-8 $spacing-6;
+  background-color: $bg-secondary;
+  
+  @include respond-to('md') {
+    padding: $spacing-6 $spacing-4;
+  }
+  
+  @include respond-to('sm') {
+    padding: $spacing-4 $spacing-3;
+  }
+}
+
+.page-header {
+  margin-bottom: $spacing-8;
+  padding-bottom: $spacing-6;
+  border-bottom: $border-width-thin solid $border-primary;
+  
+  h1 {
+    margin-bottom: $spacing-2;
+    color: $text-primary;
+  }
+  
+  p {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    margin: 0;
+  }
+  
+  @include respond-to('sm') {
+    margin-bottom: $spacing-6;
+    padding-bottom: $spacing-4;
+    
+    h1 {
+      font-size: $font-size-2xl;
+    }
+    
+    p {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.page-content {
+  max-width: $container-xl;
+  margin: 0 auto;
+  width: 100%;
+  
+  &--narrow {
+    max-width: $container-md;
+  }
+  
+  &--wide {
+    max-width: $container-2xl;
+  }
+  
+  &--full {
+    max-width: none;
+  }
+}
+
+// Container
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-4;
+  padding-right: $spacing-4;
+  
+  &--sm {
+    max-width: $container-sm;
+  }
+  
+  &--md {
+    max-width: $container-md;
+  }
+  
+  &--lg {
+    max-width: $container-lg;
+  }
+  
+  &--xl {
+    max-width: $container-xl;
+  }
+  
+  &--2xl {
+    max-width: $container-2xl;
+  }
+}

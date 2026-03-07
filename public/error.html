@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Trading Platform</title>
+    <meta name="description" content="The page you're looking for doesn't exist on the Trading Platform.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./vite.svg">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./assets/css/error.css" as="style">
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    
+    <!-- Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .error-container {
+            text-align: center;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .error-message {
+            font-size: 1rem;
+            color: #718096;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            transform: translateY(-1px);
+        }
+        
+        .trading-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .error-details {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #718096;
+        }
+        
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 2rem 1rem;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="trading-icon">
+            📈
+        </div>
+        
+        <div class="error-code">404</div>
+        
+        <h1 class="error-title">Page Not Found</h1>
+        
+        <p class="error-message">
+            Sorry, the page you're looking for doesn't exist or has been moved. 
+            This might be due to a broken link or an outdated bookmark.
+        </p>
+        
+        <div class="error-actions">
+            <a href="./" class="btn btn-primary">Go Home</a>
+            <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+            <a href="javascript:location.reload()" class="btn btn-secondary">Refresh Page</a>
+        </div>
+        
+        <div class="error-details">
+            <strong>What you can do:</strong><br>
+            • Check the URL for typos<br>
+            • Use the navigation menu to find what you're looking for<br>
+            • Try refreshing the page<br>
+            • Contact support if you believe this is an error
+        </div>
+        
+        <div class="error-details" style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
+            <strong>Technical Details:</strong><br>
+            • Error Code: 404<br>
+            • Timestamp: <span id="timestamp"></span><br>
+            • User Agent: <span id="userAgent"></span>
+        </div>
+    </div>
+    
+    <script>
+        // Set timestamp and user agent
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+        document.getElementById('userAgent').textContent = navigator.userAgent.substring(0, 50) + '...';
+        
+        // Auto-redirect to home page after 15 seconds (optional)
+        // setTimeout(() => {
+        //     window.location.href = './';
+        // }, 15000);
+        
+        // Log error for analytics (if you have analytics set up)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: '404 Error',
+                page_location: window.location.href
+            });
+        }
+        
+        // Track error in console for debugging
+        console.error('404 Error - Page not found:', {
+            url: window.location.href,
+            referrer: document.referrer,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        });
+        
+        // Send error to monitoring service (if available)
+        if (typeof window.tradingPlatformErrorHandler === 'function') {
+            window.tradingPlatformErrorHandler({
+                type: '404',
+                url: window.location.href,
+                referrer: document.referrer,
+                timestamp: new Date().toISOString()
+            });
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+// ============================================
+// MAIN SCSS ENTRY POINT
+// ============================================
+
+// 1. Abstracts - Use 'as *' to make variables/mixins/functions global
+@use './abstracts/variables' as *;
+@use './abstracts/functions' as *;
+@use './abstracts/mixins' as *;
+
+// 2. Base styles
+@use './base/reset';
+@use './base/typography';
+
+// 3. Layout
+@use './layout/page-layout';
+// @use './layout/grid';
+@use './layout/header';
+@use './layout/footer';
+
+// 4. Components
+@use './components/button';
+@use './components/card';
+@use './components/form';
+@use './components/input';
+@use './components/table';
+@use './components/badge';
+@use './components/spinner';
+@use './components/newsfeed';
+
+// 5. Pages
+@use './pages/dashboard';
+@use './pages/auth';
+// @use './pages/watchlist';
+@use './pages/portfolio';
+
+// 6. Utilities (should be last)
+@use './utilities/helpers';
+@use './utilities/spacing';
+// @use './utilities/animations';

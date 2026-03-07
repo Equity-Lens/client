@@ -1,0 +1,388 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================
+// HEADER / NAVIGATION
+// ============================================
+
+.header {
+  background-color: $bg-primary;
+  border-bottom: $border-width-thin solid $border-primary;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  width: 100%;
+}
+
+.nav-container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-6;
+  @include flex-between;
+  height: 64px;
+  
+  @include respond-to('md') {
+    padding: 0 $spacing-4;
+  }
+  
+  @include respond-to('sm') {
+    padding: 0 $spacing-3;
+  }
+}
+
+// ============================================
+// BRAND / LOGO
+// ============================================
+
+.nav-brand {
+  flex-shrink: 0;
+  
+  .brand-link {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    text-decoration: none;
+    transition: $transition-colors;
+    
+    &:hover {
+      color: $brand-primary;
+    }
+    
+    @include respond-to('md') {
+      font-size: $font-size-lg;
+    }
+    
+    @include respond-to('sm') {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+// ============================================
+// NAVIGATION LINKS
+// ============================================
+
+.nav-links {
+  display: flex;              // ✅ Makes links horizontal
+  align-items: center;        // ✅ Centers vertically
+  gap: $spacing-1;            // ✅ Space between links
+  list-style: none;
+  margin: 0 $spacing-6 0 auto;
+  padding: 0;
+  
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  @include respond-to('sm') {
+    display: none;  // Hide on mobile
+  }
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  text-decoration: none;
+  border-radius: $radius-md;
+  transition: $transition-all;
+  position: relative;
+  white-space: nowrap;
+  
+  &:hover {
+    color: $brand-primary;
+    background-color: $bg-secondary;
+  }
+  
+  &.active {
+    color: $brand-primary;
+    background-color: tint($brand-primary, 90%);
+    font-weight: $font-weight-semibold;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: $spacing-2;
+      right: $spacing-2;
+      height: 2px;
+      background-color: $brand-primary;
+      border-radius: $radius-full;
+    }
+  }
+  
+  @include respond-to('lg') {
+    padding: $spacing-2 $spacing-3;
+    font-size: $font-size-sm;
+  }
+}
+
+// ============================================
+// AUTH SECTION
+// ============================================
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  margin-left: auto;
+  padding-left: $spacing-4;
+  
+  @include respond-to('md') {
+    padding-left: $spacing-2;
+  }
+}
+
+// ============================================
+// SIGN IN BUTTON
+// ============================================
+
+.btn-signin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-3 $spacing-6;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-inverse;
+  background: linear-gradient(135deg, $brand-primary 0%, $brand-primary-dark 100%);
+  border-radius: $radius-lg;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba($brand-primary, 0.2);
+  white-space: nowrap;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba($brand-primary, 0.3);
+    color: $text-inverse;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  @include respond-to('md') {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-xs;
+  }
+  
+  @include respond-to('sm') {
+    padding: $spacing-2 $spacing-3;
+  }
+}
+
+// ============================================
+// USER MENU
+// ============================================
+
+.user-menu {
+  position: relative;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-2 $spacing-3;
+  background: $bg-secondary;
+  border: 1px solid $border-primary;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: $bg-tertiary;
+    border-color: $border-secondary;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  @include respond-to('md') {
+    padding: $spacing-2;
+  }
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: linear-gradient(135deg, $brand-primary 0%, $brand-primary-light 100%);
+  color: $text-inverse;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  flex-shrink: 0;
+  
+  @include respond-to('sm') {
+    width: 32px;
+    height: 32px;
+    font-size: $font-size-sm;
+  }
+}
+
+.user-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  max-width: 120px;
+  @include text-truncate;
+  
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
+.user-chevron {
+  width: 16px;
+  height: 16px;
+  color: $text-tertiary;
+  transition: transform 0.2s ease;
+  
+  &.rotate {
+    transform: rotate(180deg);
+  }
+  
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
+// ============================================
+// USER DROPDOWN MENU
+// ============================================
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + $spacing-2);
+  right: 0;
+  min-width: 260px;
+  background: $bg-primary;
+  border: 1px solid $border-primary;
+  border-radius: $radius-xl;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: $z-index-dropdown;
+  animation: slideInDown 0.2s ease-out;
+  overflow: hidden;
+  
+  @include respond-to('sm') {
+    min-width: 240px;
+  }
+}
+
+.dropdown-header {
+  padding: $spacing-4;
+  background: linear-gradient(135deg, rgba($brand-primary, 0.05) 0%, transparent 100%);
+}
+
+.dropdown-user-info {
+  .dropdown-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin: 0 0 $spacing-1 0;
+    @include text-truncate;
+  }
+  
+  .dropdown-email {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin: 0;
+    @include text-truncate;
+  }
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: $border-primary;
+  margin: 0;
+}
+
+.dropdown-menu {
+  padding: $spacing-2;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  width: 100%;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  background: none;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left;
+  transition: all 0.15s ease;
+  
+  &:hover {
+    background: $bg-secondary;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &-danger {
+    color: $color-error;
+    
+    .dropdown-icon {
+      color: $color-error;
+    }
+    
+    &:hover {
+      background: rgba($color-error, 0.1);
+    }
+  }
+}
+
+.dropdown-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: $text-tertiary;
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// RESPONSIVE MOBILE
+// ============================================
+
+@include respond-to('sm') {
+  .nav-auth {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .btn-signin {
+    padding: $spacing-2 $spacing-4;
+  }
+}

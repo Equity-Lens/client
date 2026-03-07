@@ -1,0 +1,53 @@
+@use 'sass:color';
+@use 'sass:math';
+@use 'sass:map';
+
+// ============================================
+// SCSS FUNCTIONS
+// ============================================
+
+// Convert pixels to rem
+@function rem($pixels, $base: 16px) {
+  @return math.div($pixels, $base) * 1rem;
+}
+
+// Get spacing value
+@function spacing($multiplier) {
+  @return $spacing-4 * $multiplier;
+}
+
+// Lighten color
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+// Darken color
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+// Calculate contrast ratio (WCAG)
+@function luminance($color) {
+  $rgb: (
+    'r': color.red($color),
+    'g': color.green($color),
+    'b': color.blue($color)
+  );
+  
+  @each $name, $value in $rgb {
+    $value: math.div($value, 255);
+    
+    @if $value < 0.03928 {
+      $value: math.div($value, 12.92);
+    } @else {
+      $value: math.div($value + 0.055, 1.055);
+      $value: math.pow($value, 2.4);
+    }
+    
+    $rgb: map.merge($rgb, ($name: $value));
+  }
+  
+  @return (map.get($rgb, 'r') * 0.2126) + 
+          (map.get($rgb, 'g') * 0.7152) + 
+          (map.get($rgb, 'b') * 0.0722);
+}

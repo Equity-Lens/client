@@ -1,0 +1,66 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.earnings-calendar {
+  .next-earnings {
+    background: $bg-secondary;
+    border-radius: $radius-md;
+    padding: $spacing-4;
+    margin-bottom: $spacing-4;
+
+    .date-info {
+      @include flex-center;
+      justify-content: flex-start;
+      gap: $spacing-2;
+      margin-bottom: $spacing-2;
+
+      svg {
+        color: $brand-primary;
+      }
+
+      .date {
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        color: $text-primary;
+      }
+    }
+
+    .time-info {
+      @include flex-center;
+      justify-content: flex-start;
+      gap: $spacing-2;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      margin-bottom: $spacing-2;
+
+      svg {
+        color: $text-tertiary;
+      }
+    }
+
+    .quarter-info {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+    }
+  }
+
+  .estimates {
+    @include flex-column;
+    gap: $spacing-3;
+
+    .estimate-item {
+      @include flex-between;
+
+      .label {
+        font-size: $font-size-sm;
+        color: $text-tertiary;
+      }
+
+      .value {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $text-primary;
+      }
+    }
+  }
+}

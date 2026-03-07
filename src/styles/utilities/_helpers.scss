@@ -1,0 +1,104 @@
+// ============================================
+// UTILITY CLASSES
+// ============================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Display
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.d-grid { display: grid !important; }
+
+// Flex utilities
+.flex-row { flex-direction: row; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-center { @include flex-center; }
+.flex-between { @include flex-between; }
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+
+// Width
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.w-screen { width: 100vw; }
+
+// Height
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+
+// Overflow
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+
+// Position
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+// Colors
+.text-primary { color: $text-primary; }
+.text-secondary { color: $text-secondary; }
+.text-success { color: $color-success; }
+.text-error { color: $color-error; }
+.text-warning { color: $color-warning; }
+
+.bg-primary { background-color: $bg-primary; }
+.bg-secondary { background-color: $bg-secondary; }
+
+// Borders
+.border { border: $border-width-thin solid $border-primary; }
+.border-top { border-top: $border-width-thin solid $border-primary; }
+.border-bottom { border-bottom: $border-width-thin solid $border-primary; }
+.border-none { border: none; }
+
+// Border radius
+.rounded-none { border-radius: $radius-none; }
+.rounded-sm { border-radius: $radius-sm; }
+.rounded { border-radius: $radius-base; }
+.rounded-md { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-xl { border-radius: $radius-xl; }
+.rounded-full { border-radius: $radius-full; }
+
+// Shadows
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow { box-shadow: $shadow-base; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+.shadow-xl { box-shadow: $shadow-xl; }
+.shadow-none { box-shadow: none; }
+
+// Cursor
+.cursor-pointer { cursor: pointer; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+// User select
+.select-none { user-select: none; }
+.select-all { user-select: all; }
+
+// Pointer events
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+
+// Visibility
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+
+// Opacity
+@for $i from 0 through 10 {
+  .opacity-#{$i * 10} {
+    opacity: $i * 0.1;
+  }
+}

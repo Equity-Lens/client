@@ -1,0 +1,319 @@
+// ============================================
+// NEWS FEED STYLES - CLEAN GRID LAYOUT
+// ============================================
+
+.news-feed {
+  margin-top: 40px;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.news-feed__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.news-feed__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  svg {
+    color: #3b82f6;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+  }
+}
+
+// Category Tabs
+.news-feed__categories {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+.category-tab {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(.active) {
+    color: #374151;
+  }
+
+  &.active {
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+}
+
+// ============================================
+// NEWS GRID - UNIFORM CARDS
+// ============================================
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+// ============================================
+// NEWS CARD - COMPACT & CLEAN
+// ============================================
+
+.news-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+
+    .news-card__image img {
+      transform: scale(1.03);
+    }
+  }
+}
+
+// Card Image
+.news-card__image {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: #f9fafb;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+
+    svg {
+      color: #d1d5db;
+    }
+  }
+}
+
+// Card Content
+.news-card__content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+// Meta (Source & Time)
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.news-card__source {
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.news-card__time {
+  color: #9ca3af;
+}
+
+// Title
+.news-card__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ============================================
+// LOADING SKELETONS
+// ============================================
+
+.news-card-skeleton {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-meta {
+  height: 12px;
+  width: 50%;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 14px;
+  width: 100%;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-title-2 {
+  height: 14px;
+  width: 75%;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// ============================================
+// ERROR & EMPTY STATES
+// ============================================
+
+.news-feed__error,
+.news-feed__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+
+  p {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+
+  button {
+    padding: 8px 16px;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #2563eb;
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE DESIGN
+// ============================================
+
+@media (max-width: 1024px) {
+  .news-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .news-feed {
+    padding: 0 16px;
+    margin-top: 32px;
+  }
+
+  .news-feed__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .news-feed__categories {
+    width: 100%;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-card__image {
+    height: 140px;
+  }
+}

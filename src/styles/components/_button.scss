@@ -1,0 +1,115 @@
+// ============================================
+// BUTTON COMPONENT
+// ============================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.btn {
+  @include button-base;
+  
+  // Primary variant
+  &--primary {
+    @include button-primary;
+  }
+  
+  // Secondary variant
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  // Outline variant
+  &--outline {
+    @include button-base;
+    background-color: transparent;
+    color: $brand-primary;
+    border: $border-width-medium solid $brand-primary;
+    
+    &:hover:not(:disabled) {
+      background-color: $brand-primary;
+      color: $text-inverse;
+    }
+  }
+  
+  // Danger variant
+  &--danger {
+    @include button-base;
+    background-color: $color-error;
+    color: $text-inverse;
+    
+    &:hover:not(:disabled) {
+      background-color: shade($color-error, 10%);
+    }
+  }
+  
+  // Success variant
+  &--success {
+    @include button-base;
+    background-color: $color-success;
+    color: $text-inverse;
+    
+    &:hover:not(:disabled) {
+      background-color: shade($color-success, 10%);
+    }
+  }
+  
+  // Ghost variant
+  &--ghost {
+    @include button-base;
+    background-color: transparent;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background-color: $bg-secondary;
+    }
+  }
+  
+  // Sizes
+  &--sm {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-sm;
+  }
+  
+  &--lg {
+    padding: $spacing-4 $spacing-8;
+    font-size: $font-size-lg;
+  }
+  
+  // Full width
+  &--block {
+    width: 100%;
+  }
+  
+  // With icon
+  &__icon {
+    margin-right: $spacing-2;
+    
+    &--right {
+      margin-right: 0;
+      margin-left: $spacing-2;
+    }
+  }
+  
+  // Loading state
+  &--loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+    
+    &::after {
+      content: '';
+      @include absolute-center;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: $radius-full;
+      animation: spin 0.6s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

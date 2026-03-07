@@ -1,0 +1,127 @@
+# S3 Static Website Hosting Redirects for Trading Platform SPA
+# This file handles client-side routing for React Router and caching optimization
+
+# =============================================================================
+# SPA ROUTING - Redirect all non-asset requests to index.html
+# =============================================================================
+
+# Main SPA routing rule - must be first
+/*    /index.html   200
+
+# =============================================================================
+# SPECIFIC ROUTE REDIRECTS
+# =============================================================================
+
+# Dashboard routes
+/dashboard    /index.html    200
+/dashboard/   /index.html    200
+
+# Portfolio routes
+/portfolio    /index.html    200
+/portfolio/   /index.html    200
+
+# Stock Detail routes (with dynamic parameters)
+/stock/*      /index.html    200
+/stock-detail /index.html    200
+/stock-detail/ /index.html   200
+
+# Watchlist routes
+/watchlist    /index.html    200
+/watchlist/   /index.html    200
+
+# Settings routes
+/settings     /index.html    200
+/settings/    /index.html    200
+
+# Profile routes
+/profile      /index.html    200
+/profile/     /index.html    200
+
+# Authentication routes
+/login        /index.html    200
+/login/       /index.html    200
+/register     /index.html    200
+/register/    /index.html    200
+/logout       /index.html    200
+/logout/      /index.html    200
+
+# Error pages
+/404          /index.html    200
+/error        /index.html    200
+/not-found    /index.html    200
+
+# Health check endpoint
+/health       /index.html    200
+/status       /index.html    200
+
+# =============================================================================
+# CACHING OPTIMIZATION
+# =============================================================================
+
+# Cache static assets for 1 year (immutable assets)
+/assets/js/*.js      /:splat    200    Cache-Control: max-age=31536000, immutable
+/assets/css/*.css    /:splat    200    Cache-Control: max-age=31536000, immutable
+/assets/images/*     /:splat    200    Cache-Control: max-age=31536000, immutable
+/assets/fonts/*      /:splat    200    Cache-Control: max-age=31536000, immutable
+
+# Cache HTML files for 1 hour (allows for updates)
+/*.html              /:splat    200    Cache-Control: max-age=3600, must-revalidate
+
+# Cache service worker for 1 hour
+/service-worker.js   /:splat    200    Cache-Control: max-age=3600, must-revalidate
+
+# Cache manifest files for 1 day
+/manifest.json       /:splat    200    Cache-Control: max-age=86400
+
+# Cache favicon for 1 week
+/favicon.ico         /:splat    200    Cache-Control: max-age=604800
+
+# Cache robots.txt for 1 day
+/robots.txt          /:splat    200    Cache-Control: max-age=86400
+
+# =============================================================================
+# SECURITY HEADERS
+# =============================================================================
+
+# Security headers for all responses (if supported by your S3 setup)
+# Uncomment these if your S3 setup supports custom headers:
+# /*    /:splat    200    X-Frame-Options: DENY, X-Content-Type-Options: nosniff, X-XSS-Protection: 1; mode=block, Referrer-Policy: strict-origin-when-cross-origin
+
+# =============================================================================
+# HTTPS REDIRECTS (Uncomment if you want to force HTTPS)
+# =============================================================================
+
+# Force HTTPS redirect (replace your-domain.com with your actual domain)
+# http://your-domain.com/*    https://your-domain.com/:splat    301!
+
+# =============================================================================
+# TRAILING SLASH HANDLING (Optional)
+# =============================================================================
+
+# Remove trailing slashes (uncomment if you want to enforce no trailing slashes)
+# /*/          /:splat        301
+
+# =============================================================================
+# API ROUTES (If you have API routes in the same bucket)
+# =============================================================================
+
+# Uncomment and modify if you have API routes in the same S3 bucket:
+# /api/*    /api/:splat    200
+
+# =============================================================================
+# CUSTOM ERROR PAGES
+# =============================================================================
+
+# Custom 404 page (if you want to serve a specific error page)
+# /404    /error.html    404
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+# 1. The order of rules matters - more specific rules should come first
+# 2. The main SPA routing rule (/* /index.html 200) should be last among routing rules
+# 3. Caching rules should come after routing rules
+# 4. Test your redirects thoroughly after deployment
+# 5. Monitor your S3 access logs to ensure redirects are working correctly
+

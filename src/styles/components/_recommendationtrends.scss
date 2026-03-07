@@ -1,0 +1,62 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.recommendation-trends {
+  .period {
+    font-size: $font-size-xs;
+    color: $text-tertiary;
+    margin-bottom: $spacing-4;
+  }
+
+  .recommendation-bar {
+    display: flex;
+    height: 12px;
+    border-radius: $radius-full;
+    overflow: hidden;
+    margin-bottom: $spacing-4;
+
+    .bar-segment {
+      transition: width $transition-base;
+    }
+  }
+
+  .recommendation-legend {
+    @include flex-column;
+    gap: $spacing-2;
+
+    .legend-item {
+      @include flex-center;
+      justify-content: flex-start;
+      gap: $spacing-2;
+      font-size: $font-size-sm;
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: $radius-full;
+        flex-shrink: 0;
+      }
+
+      .label {
+        color: $text-secondary;
+        flex: 1;
+      }
+
+      .value {
+        color: $text-primary;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+
+  .recommendation-summary {
+    margin-top: $spacing-4;
+    padding-top: $spacing-3;
+    border-top: $border-width-thin solid $border-primary;
+
+    .total {
+      font-size: $font-size-sm;
+      color: $text-tertiary;
+    }
+  }
+}
