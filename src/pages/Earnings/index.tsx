@@ -74,11 +74,14 @@ const EarningsCalendar: React.FC = () => {
       const API_BASE_URL =
         import.meta.env.VITE_API_URL || "http://localhost:3001/v1";
 
-      const response = await fetch(`${API_BASE_URL}/v1/calendar/earnings?${params}`, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/calendar/earnings?${params}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
       
       if (!response.ok) {
         const errorData = await response.json();
