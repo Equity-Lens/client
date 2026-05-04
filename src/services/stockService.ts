@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_STOCK_SERVICE_URL || 'http://localhost:3001/v1';
+const API_URL = `${import.meta.env.VITE_STOCK_SERVICE_URL || 'http://localhost:8080'}/api/stock`;
 
 export interface PriceCandle {
   timestamp: number;
