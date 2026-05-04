@@ -9,7 +9,7 @@ import EPSDetails from '../../components/features/EPSDetails/index';
 import EarningsCalendarCard from '../../components/features/EarningsCalendar/index';
 import '../../styles/pages/_stockdetail.scss';
 
-type RangeOption = '1d' | '5d' | '1mo' | '3mo' | '6mo' | '1y' | '2y';
+type RangeOption = "1d" | "5d" | "1mo";
 
 const StockDetail = () => {
   const { symbol } = useParams<{ symbol: string }>();
@@ -18,19 +18,25 @@ const StockDetail = () => {
   // State
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedRange, setSelectedRange] = useState<RangeOption>('1mo');
+  const [selectedRange, setSelectedRange] = useState<RangeOption>("1mo");
 
   // Data
   const [candles, setCandles] = useState<PriceCandle[]>([]);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [eps, setEps] = useState<EarningsSurprise[]>([]);
-  const [earningsCalendar, setEarningsCalendar] = useState<EarningsCalendar[]>([]);
+  const [earningsCalendar, setEarningsCalendar] = useState<EarningsCalendar[]>(
+    [],
+  );
 
   // Derived values
-  const latestPrice = candles.length > 0 ? candles[candles.length - 1].close : 0;
-  const previousPrice = candles.length > 1 ? candles[candles.length - 2].close : latestPrice;
+  const latestPrice =
+    candles.length > 0 ? candles[candles.length - 1].close : 0;
+  const previousPrice =
+    candles.length > 1 ? candles[candles.length - 2].close : latestPrice;
   const priceChange = latestPrice - previousPrice;
-  const priceChangePercent = previousPrice ? (priceChange / previousPrice) * 100 : 0;
+  const priceChangePercent = previousPrice
+    ? (priceChange / previousPrice) * 100
+    : 0;
   const isPositive = priceChange >= 0;
 
   // Fetch chart data when range changes (skips initial mount — covered by fetchAllData)
@@ -39,7 +45,7 @@ const StockDetail = () => {
     if (initialMount.current) return;
     if (!symbol) return;
 
-    stockService.getHistory(symbol, selectedRange).then(data => {
+    stockService.getHistory(symbol, selectedRange).then((data) => {
       setCandles(data.candles);
     });
   }, [symbol, selectedRange]);
@@ -53,19 +59,20 @@ const StockDetail = () => {
       setError(null);
 
       try {
-        const [historyData, recsData, epsData, calendarData] = await Promise.all([
-          stockService.getHistory(symbol, selectedRange),
-          stockService.getRecommendations(symbol),
-          stockService.getEPS(symbol),
-          stockService.getEarningsCalendar(symbol),
-        ]);
+        const [historyData, recsData, epsData, calendarData] =
+          await Promise.all([
+            stockService.getHistory(symbol, selectedRange),
+            stockService.getRecommendations(symbol),
+            stockService.getEPS(symbol),
+            stockService.getEarningsCalendar(symbol),
+          ]);
 
         setCandles(historyData.candles);
         setRecommendations(recsData);
         setEps(epsData);
         setEarningsCalendar(calendarData);
       } catch (err: any) {
-        setError(err.message || 'Failed to load stock data');
+        setError(err.message || "Failed to load stock data");
       } finally {
         setLoading(false);
       }
@@ -76,13 +83,9 @@ const StockDetail = () => {
   }, [symbol]);
 
   const rangeOptions: { value: RangeOption; label: string }[] = [
-    { value: '1d', label: '1D' },
-    { value: '5d', label: '5D' },
-    { value: '1mo', label: '1M' },
-    { value: '3mo', label: '3M' },
-    { value: '6mo', label: '6M' },
-    { value: '1y', label: '1Y' },
-    { value: '2y', label: '2Y' },
+    { value: "1d", label: "1D" },
+    { value: "5d", label: "5D" },
+    { value: "1mo", label: "1M" },
   ];
 
   if (loading) {
@@ -117,9 +120,17 @@ const StockDetail = () => {
           <h1 className="symbol">{symbol}</h1>
           <div className="price-section">
             <span className="current-price">${latestPrice.toFixed(2)}</span>
-            <span className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
-              {isPositive ? '+' : ''}{priceChange.toFixed(2)} ({isPositive ? '+' : ''}{priceChangePercent.toFixed(2)}%)
+            <span
+              className={`price-change ${isPositive ? "positive" : "negative"}`}
+            >
+              {isPositive ? (
+                <TrendingUp size={18} />
+              ) : (
+                <TrendingDown size={18} />
+              )}
+              {isPositive ? "+" : ""}
+              {priceChange.toFixed(2)} ({isPositive ? "+" : ""}
+              {priceChangePercent.toFixed(2)}%)
             </span>
           </div>
         </div>
@@ -133,7 +144,7 @@ const StockDetail = () => {
             {rangeOptions.map((option) => (
               <button
                 key={option.value}
-                className={`range-btn ${selectedRange === option.value ? 'active' : ''}`}
+                className={`range-btn ${selectedRange === option.value ? "active" : ""}`}
                 onClick={() => setSelectedRange(option.value)}
               >
                 {option.label}
@@ -141,7 +152,7 @@ const StockDetail = () => {
             ))}
           </div>
         </div>
-        <StockChart candles={candles} symbol={symbol || ''} />
+        <StockChart candles={candles} symbol={symbol || ""} />
       </div>
 
       {/* Data Grid */}
