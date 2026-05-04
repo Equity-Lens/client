@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { createChart, ColorType } from 'lightweight-charts';
+import { createChart, ColorType, AreaSeries } from 'lightweight-charts';
 import type { PriceCandle } from '../../../services/stockService';
 import '../../../styles/components/_stockchart.scss';
 
@@ -75,7 +75,7 @@ const StockChart = ({ candles }: StockChartProps) => {
     });
 
     // Add area series
-    const areaSeries = chart.addAreaSeries({
+    const areaSeries = chart.addSeries(AreaSeries, {
       lineColor: isPositive ? colors.success : colors.error,
       topColor: isPositive ? 'rgba(16, 185, 129, 0.4)' : 'rgba(239, 68, 68, 0.4)',
       bottomColor: isPositive ? 'rgba(16, 185, 129, 0.0)' : 'rgba(239, 68, 68, 0.0)',

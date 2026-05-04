@@ -1,10 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDebounceSearch } from "../../../hooks/useDebounceSearch";
 import "../../../styles/components/_stock-search.scss";
 
 const StockSearch: React.FC = () => {
+  const navigate = useNavigate();
   const { query, results, loading, error, updateQuery, clearSearch } =
     useDebounceSearch(300);
+
+  const handleSelectStock = (symbol: string) => {
+    clearSearch();
+    navigate(`/stock/${symbol}`);
+  };
 
   return (
     <div className="stock-search">
@@ -55,6 +62,8 @@ const StockSearch: React.FC = () => {
                     stock.change >= 0 ? "+" : ""
                   }${stock.change.toFixed(2)}%`}
                   style={{ animationDelay: `${index * 0.05}s` }}
+                  onClick={() => handleSelectStock(stock.symbol)}
+                  onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && handleSelectStock(stock.symbol)}
                 >
                   <div className="stock-info">
                     <div className="stock-symbol">{stock.symbol}</div>

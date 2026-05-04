@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, TrendingUp, TrendingDown, Loader2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Loader2 } from 'lucide-react';
 import type { PriceCandle, Recommendation, EarningsSurprise, EarningsCalendar } from '../../services/stockService';
 import { stockService } from '../../services/stockService'
 import StockChart from '../../components/features/StockChart/index';
-import RecommendationTrends from '../../components/features//RecommendationTrends/index';
+import RecommendationTrends from '../../components/features/RecommendationTrends/index';
 import EPSDetails from '../../components/features/EPSDetails/index';
 import EarningsCalendarCard from '../../components/features/EarningsCalendar/index';
 import '../../styles/pages/_stockdetail.scss';
@@ -33,20 +33,15 @@ const StockDetail = () => {
   const priceChangePercent = previousPrice ? (priceChange / previousPrice) * 100 : 0;
   const isPositive = priceChange >= 0;
 
-  // Fetch chart data when range changes
+  // Fetch chart data when range changes (skips initial mount — covered by fetchAllData)
+  const initialMount = useRef(true);
   useEffect(() => {
+    if (initialMount.current) return;
     if (!symbol) return;
 
-    const fetchChartData = async () => {
-      try {
-        const historyData = await stockService.getHistory(symbol, selectedRange);
-        setCandles(historyData.candles);
-      } catch (err: any) {
-        console.error('Error fetching chart:', err);
-      }
-    };
-
-    fetchChartData();
+    stockService.getHistory(symbol, selectedRange).then(data => {
+      setCandles(data.candles);
+    });
   }, [symbol, selectedRange]);
 
   // Fetch all data on mount
@@ -77,6 +72,7 @@ const StockDetail = () => {
     };
 
     fetchAllData();
+    initialMount.current = false;
   }, [symbol]);
 
   const rangeOptions: { value: RangeOption; label: string }[] = [

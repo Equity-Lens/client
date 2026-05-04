@@ -35,3 +35,8 @@ dist-ssr
 
 # Build analysis
 stats.html
+
+# Claude Code
+.claude/
+CLAUDE.md
+.claudeignore

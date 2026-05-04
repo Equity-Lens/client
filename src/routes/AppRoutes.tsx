@@ -50,22 +50,6 @@ const AppRoutes: React.FC = () => {
           );
         })}
 
-        {/* Protected Routes */}
-        {protectedRoutes.map((route) => {
-          const Component = route.element;
-          return (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={
-                <ProtectedRoute>
-                  <Component />
-                </ProtectedRoute>
-              }
-            />
-          );
-        })}
-
         {/* 404 */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
